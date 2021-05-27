@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+{{-- looping for check elequent serialization --}}
+{{-- @foreach ($cars as $car)
+    {{ $car->name }}//select toJson()
+    {{ $car['name'] }}//select toArray()
+@endforeach --}}
+
 @section('content')
     <div class="container">
         <div class="row mt-4">
@@ -22,7 +28,7 @@
         </div>
 
         <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-9 col-sm-10">
                 @foreach ($cars as $car)
                     <a href="cars/{{ $car->id }}" style="text-decoration: none; color:#333">
                         <div class="item px-5 py-4 mt-5" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">

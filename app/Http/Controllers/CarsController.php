@@ -14,9 +14,13 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $cars = Car::all();
+        // if convert data to json, that data should decode firstly
+        $cars = Car::all()->toJson();
+        $cars = json_decode($cars);
 
-        
+        // $cars = Car::all()->toArray();
+        // var_dump($cars);
+         
         return view('cars.index', [
             'cars' => $cars
         ]);
@@ -58,7 +62,8 @@ class CarsController extends Controller
     public function show($id)
     {
         // dd($id);
-        $car = Car::find($id);
+        $car = Car::find($id)->toJson();
+        $car = json_decode($car);
 
         return view('cars.show')->with('car', $car);
     }
@@ -72,7 +77,8 @@ class CarsController extends Controller
     public function edit($id)
     {
         // dd($id);
-        $car = Car::find($id);
+        $car = Car::find($id)->toJson();
+        $car = json_decode($car);
 
         return view('cars.edit')->with('car', $car);
     }
