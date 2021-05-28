@@ -69,14 +69,19 @@ class CarsController extends Controller
         // $car = Car::find($id)->toJson();
         // $car = json_decode($car);
 
-        //this select from cars table
+        // this select from cars table
         // $hq = $car->headquarters;
         // dd($hq);
 
-        //this select from headquarters table
+        // this select from headquarters table
         // $hq = Headquarter::find($id);
         // dd($hq);
 
+        // check hasMany data in engine table
+        // dd($car->engines);
+
+        //check hasOne data in car_production_date table
+        // var_dump($car->productionDate);
 
         return view('cars.show')->with('car', $car);
     }
