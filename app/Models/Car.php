@@ -21,4 +21,8 @@ class Car extends Model
 
     //show only data
     protected $visible = ['id', 'name', 'founded', 'description'];
+
+    public function carModels(){
+        return $this->hasMany(CarModel::class);
+    }
 }

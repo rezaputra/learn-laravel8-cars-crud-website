@@ -34,7 +34,7 @@
                         <div class="item px-5 py-4 mt-5" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
                             <p class="fs-5 fst-italic">Founded in {{ $car->founded }}</p>
                             <p class="fs-3 fw-bold">{{ $car->name }}</p>
-                            <p>{{ $car->description }}</p>
+                            {{-- <p>{{ $car->description }}</p> --}}
     
                             <div class="actions mt-4 d-inline-flex">
                                 <a href="cars/{{ $car->id }}/edit">

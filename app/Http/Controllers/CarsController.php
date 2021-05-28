@@ -62,8 +62,9 @@ class CarsController extends Controller
     public function show($id)
     {
         // dd($id);
-        $car = Car::find($id)->toJson();
-        $car = json_decode($car);
+        $car = Car::find($id);
+        // $car = Car::find($id)->toJson();
+        // $car = json_decode($car);
 
         return view('cars.show')->with('car', $car);
     }
