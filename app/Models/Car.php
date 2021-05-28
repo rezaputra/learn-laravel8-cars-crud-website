@@ -22,7 +22,13 @@ class Car extends Model
     //show only data
     protected $visible = ['id', 'name', 'founded', 'description'];
 
+    //one to many
     public function carModels(){
         return $this->hasMany(CarModel::class);
+    }
+
+    //one to one
+    public function headquarters(){
+        return $this->hasOne(Headquarter::class);
     }
 }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Car;
 
+//for select from headquarters table
+use App\Models\Headquarter;
+
 class CarsController extends Controller
 {
     /**
@@ -65,6 +68,15 @@ class CarsController extends Controller
         $car = Car::find($id);
         // $car = Car::find($id)->toJson();
         // $car = json_decode($car);
+
+        //this select from cars table
+        // $hq = $car->headquarters;
+        // dd($hq);
+
+        //this select from headquarters table
+        // $hq = Headquarter::find($id);
+        // dd($hq);
+
 
         return view('cars.show')->with('car', $car);
     }
