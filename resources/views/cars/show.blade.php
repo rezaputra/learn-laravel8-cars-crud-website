@@ -42,16 +42,32 @@
                                                     @endif
                                                 @endforeach
                                             </td>
-
-                                            <td class="text-center">{{ date('d-m-y', strtotime($car->productionDate->created_at)) }}</td>
+                                            
+                                            
+                                            <td class="text-center">
+                                                @if ($car->productionDate !== null)
+                                                    <p>{{ date('d-m-y', strtotime($car->productionDate->created_at)) }}</p>
+                                                @else
+                                                    <p>Date is secret</p>
+                                                @endif
+                                            </td>                                                
+                                            
 
                                         </tr>
                                     @empty
                                         <p class="fst-italic text-center">This car has no models</p>
                                     @endforelse
                                 </tbody>                      
-                                
                             </table>
+
+                            <p>
+                                Product types:
+                                @forelse ($car->products as $product)
+                                    {{ $product->name }}
+                                @empty
+                                    Secret
+                                @endforelse
+                            </p>
                         </div>
                     </div>
                     

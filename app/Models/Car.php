@@ -54,4 +54,9 @@ class Car extends Model
         );
     }
 
+    //this for many to many
+    public function products(){
+        return $this->belongsToMany(Product::class);
+    }
+
 }

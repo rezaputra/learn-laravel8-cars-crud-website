@@ -7,6 +7,9 @@ use App\Models\Car;
 
 //for select from headquarters table
 use App\Models\Headquarter;
+use App\Models\Product;
+
+
 
 class CarsController extends Controller
 {
@@ -80,8 +83,15 @@ class CarsController extends Controller
         // check hasMany data in engine table
         // dd($car->engines);
 
-        //check hasOne data in car_production_date table
+        // check hasOne data in car_production_date table
         // var_dump($car->productionDate);
+
+        // check pivot table which has been created automatically in many to many relationship
+        // var_dump($car->products);
+
+        // select data start from products table in many to many relationship
+        // $products = Product::find($id);
+        // dd($products->cars);
 
         return view('cars.show')->with('car', $car);
     }
