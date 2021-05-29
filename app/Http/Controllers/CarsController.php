@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Car;
 
-//for select from headquarters table
+// join data with headquarters and cars table start from headquarters table
 use App\Models\Headquarter;
+// join data with product, car_product and cars table start from product table
 use App\Models\Product;
 
 
@@ -21,11 +22,13 @@ class CarsController extends Controller
     public function index()
     {
         // if convert data to json, that data should decode firstly
-        $cars = Car::all()->toJson();
-        $cars = json_decode($cars);
+        // $cars = Car::all(1)->toJson();
+        // $cars = json_decode($cars);
 
         // $cars = Car::all()->toArray();
         // var_dump($cars);
+
+        $cars = Car::paginate(4);
          
         return view('cars.index', [
             'cars' => $cars

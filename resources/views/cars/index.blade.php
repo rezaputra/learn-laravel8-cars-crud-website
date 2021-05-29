@@ -50,6 +50,9 @@
                     </a>
                 @endforeach
             </div>
+            <div class="pagination mt-5 d-flex justify-content-center fixed">
+                {{ $cars->links() }}
+            </div>
         </div>
     </div>
 @endsection
