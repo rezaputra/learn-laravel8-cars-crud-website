@@ -28,6 +28,41 @@ class CarsController extends Controller
         // $cars = Car::all()->toArray();
         // var_dump($cars);
 
+        // Accessing the data
+        // request all input field including _token data
+        // $car = $request->all();
+
+        // except method, if want except more data you should use array => except([])
+        // $car = $request->except('_token');
+
+        // only method, for using this the way same with except method
+        // $car = $request->only(['name', 'founded', 'description']);
+
+        // has method, same with except for using it, but this method will return boolean type
+        // $car = $request->has('name');
+
+        // check current path information
+        // dd($request->path());
+
+        // check the endpoint
+        // if ($request->is('cars')){
+        //     dd('the endpoint is /cars');
+        // }
+
+        // check the current method was used
+        // but you can use method isMethod() instead method() the return values are same
+        // if ($request->method('POST')) {
+        //     dd('method is post');
+        // }
+
+        // show the url
+        // dd($request->url())
+
+        // show user ip
+        dd($request->ip())
+        
+
+
         $cars = Car::paginate(4);
          
         return view('cars.index', [
