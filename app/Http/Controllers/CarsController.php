@@ -13,6 +13,8 @@ use App\Models\Product;
 // use custom rule for validate the data
 use App\Rules\Uppercase;
 
+// use custom our own validation
+use App\Http\Requests\CreateValidationRequest;
 
 
 class CarsController extends Controller
@@ -89,16 +91,19 @@ class CarsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateValidationRequest $request)//change default Request validation with your own validation
     {
         
-        // Validate the data before store it
-        // if the data not valid, this method will throw a ValidationException
-        $request->validate([
-            'name' =>  New Uppercase, // or => 'required|unique:cars'  for data of name should unique in table cars
-            'founded' => 'required|integer|min:0|max:2021',
-            'description' => 'required',
-        ]);
+        // Validate the data direct in controller before store it
+        // if the data not valid, this method will throw a ValidationException 
+        // $request->validate([
+        //     'name' =>  New Uppercase, // or => 'required|unique:cars'  for data of name should unique in table cars
+        //     'founded' => 'required|integer|min:0|max:2021',
+        //     'description' => 'required',
+        // ]);
+        
+        $request->validated();
+
             
         $car = Car::create([
             'name' => $request->input('name'),
@@ -168,8 +173,10 @@ class CarsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(CreateValidationRequest $request, $id)
+    {   
+        $request->validated();
+
         $car = Car::where('id', $id)->update([
             'name' => $request->input('name'),
             'founded' => $request->input('founded'),
