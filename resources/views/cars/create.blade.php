@@ -18,5 +18,19 @@
                 </form>
             </div>
         </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="error d-flex justify-content-center">
+                    @if ($errors->any())
+                    <ul style="list-style-type: none" class="fst-italic text-danger">
+                        @foreach ($errors->all() as $error)                    
+                            <li class="mt-2">{{ $error }}</li>                        
+                        @endforeach
+                    </ul>
+                    @endif
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

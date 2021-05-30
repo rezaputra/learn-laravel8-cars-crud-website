@@ -10,6 +10,9 @@ use App\Models\Headquarter;
 // join data with product, car_product and cars table start from product table
 use App\Models\Product;
 
+// use custom rule for validate the data
+use App\Rules\Uppercase;
+
 
 
 class CarsController extends Controller
@@ -59,10 +62,10 @@ class CarsController extends Controller
         // dd($request->url())
 
         // show user ip
-        dd($request->ip())
+        // dd($request->ip())
         
 
-
+        //make a pagination
         $cars = Car::paginate(4);
          
         return view('cars.index', [
@@ -88,6 +91,15 @@ class CarsController extends Controller
      */
     public function store(Request $request)
     {
+        
+        // Validate the data before store it
+        // if the data not valid, this method will throw a ValidationException
+        $request->validate([
+            'name' =>  New Uppercase, // or => 'required|unique:cars'  for data of name should unique in table cars
+            'founded' => 'required|integer|min:0|max:2021',
+            'description' => 'required',
+        ]);
+            
         $car = Car::create([
             'name' => $request->input('name'),
             'founded' => $request->input('founded'),
