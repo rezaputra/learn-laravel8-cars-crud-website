@@ -91,24 +91,45 @@ class CarsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateValidationRequest $request)//change default Request validation with your own validation
+    public function store(Request $request)
     {
+
+        // method that we can use on $request->file()
+        // guestExtension()
+        // getMimeType()
+        // asStore()
+        // store()
+        // storePublicly()
+        // move()
+        // getClientOriginalName()
+        // getClientMimeType()
+        // guessClientExtension()
+        // getSize()
+        // getError()
+        // isValid()
+
+        // $test = $request->file('image')->getSize();
+        // dd($test);
+        
         
         // Validate the data direct in controller before store it
         // if the data not valid, this method will throw a ValidationException 
-        // $request->validate([
-        //     'name' =>  New Uppercase, // or => 'required|unique:cars'  for data of name should unique in table cars
-        //     'founded' => 'required|integer|min:0|max:2021',
-        //     'description' => 'required',
-        // ]);
-        
-        $request->validated();
+        $request->validate([
+            'image' => 'required|mimes:png,jpg, jpeg|max:5048',//kilobyte
+            'name' => 'required|unique:cars', // or => 'required|unique:cars'  for data of name should unique in table cars
+            'founded' => 'required|integer|min:0|max:2021',
+            'description' => 'required',
+        ]);
+            
 
+        $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $newImageName);
             
         $car = Car::create([
             'name' => $request->input('name'),
             'founded' => $request->input('founded'),
-            'description' => $request->input('description')
+            'description' => $request->input('description'),
+            'image_path' => $newImageName
         ]);
 
         return redirect('/cars');
@@ -173,7 +194,7 @@ class CarsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateValidationRequest $request, $id)
+    public function update(CreateValidationRequest $request, $id)//change default Request validation with your own validation
     {   
         $request->validated();
 
