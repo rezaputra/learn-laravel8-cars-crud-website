@@ -6,13 +6,9 @@
         <div class="row">
             <div class="col">
                 <div class="item px-5 py-4 mt-5 d-flex flex-column align-items-center" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
-                    @if ($car->image_path !== '')
-                        <div class="image">
-                            <img src="{{ asset('images/' . $car->image_path) }}" alt="{{ $car->image_path }}" height="300" width="500" class="img-fluid rounded">
-                        </div>
-                    @else
-                        <p>This car has no image</p>
-                    @endif
+                    <div class="image" class="mb-5">
+                        <img src="{{ asset('images/'.$car->image_path ) }}" alt="image" height="300" width="450">                        
+                    </div>
 
                     <p class="fs-3 fw-bold">{{ $car->name }}</p>
 
@@ -24,7 +20,6 @@
 
                     <p class="fs-5 fst-italic">Founded in {{ $car->founded }}</p>
                     <p>{{ $car->description }}</p>
-
 
 
                     <div class="row">

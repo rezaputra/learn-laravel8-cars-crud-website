@@ -10,7 +10,7 @@
                 <form action="/cars" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form">
-                        <input class="form-control mt-3" type="file" name="image">
+                        <input type="file" name="image" accept=".jpg,.png,.jpeg">
                         <input class="form-control mt-3" type="text" name="name" placeholder="input car name...">
                         <input class="form-control mt-3" type="number" name="founded" placeholder="founded in...">
                         <input class="form-control mt-3" type="text" name="description" placeholder="input car description...">

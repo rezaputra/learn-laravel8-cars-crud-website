@@ -99,31 +99,31 @@ class CarsController extends Controller
         // getMimeType()
         // asStore()
         // store()
+        // method we can use on $request
+        // guest Extension()
+        // getMimeType()
+        // store()
+        // asStore()
         // storePublicly()
         // move()
         // getClientOriginalName()
         // getClientMimeType()
-        // guessClientExtension()
+        // getClientExtension()
         // getSize()
         // getError()
+        // ip()
         // isValid()
-
-        // $test = $request->file('image')->getSize();
-        // dd($test);
         
-        
-        // Validate the data direct in controller before store it
-        // if the data not valid, this method will throw a ValidationException 
         $request->validate([
-            'image' => 'required|mimes:png,jpg, jpeg|max:5048',//kilobyte
-            'name' => 'required|unique:cars', // or => 'required|unique:cars'  for data of name should unique in table cars
-            'founded' => 'required|integer|min:0|max:2021',
-            'description' => 'required',
+            'image' => 'required|mimes:png,jpg,jpeg|max:5012',
+            'name' => 'required|unique:cars',
+            'founded' => 'required|min:0|max:2021',
+            'description' => 'required'
         ]);
-            
+        
+        $newImageName = time(). '-' . $request->name . '.' . $request->image->extension();
 
-        $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
-        $request->image->move(public_path('images'), $newImageName);
+        $request->image->move('images', $newImageName);
             
         $car = Car::create([
             'name' => $request->input('name'),
