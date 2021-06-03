@@ -6,9 +6,13 @@
         <div class="row">
             <div class="col">
                 <div class="item px-5 py-4 mt-5 d-flex flex-column align-items-center" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
-                    <div class="image" class="mb-5">
-                        <img src="{{ asset('images/'.$car->image_path ) }}" alt="image" height="300" width="450">                        
-                    </div>
+                    @if ($car->image_path === '')
+                        <p>no image</p>
+                    @else
+                        <div class="image" class="mb-5">
+                            <img src="{{ asset('images/'.$car->image_path ) }}" alt="image" height="300" width="450">                        
+                        </div>                        
+                    @endif
 
                     <p class="fs-3 fw-bold">{{ $car->name }}</p>
 

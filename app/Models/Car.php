@@ -12,7 +12,7 @@ class Car extends Model
     protected $table = 'cars';
     protected $primaryKey = 'id';
     
-    protected $fillable = ['name', 'founded', 'description', 'image_path'];
+    protected $fillable = ['name', 'founded', 'description', 'image_path', 'user_id'];
 
     // the output are same between toArray() and toJson() 
 
