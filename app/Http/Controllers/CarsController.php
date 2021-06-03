@@ -91,24 +91,39 @@ class CarsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateValidationRequest $request)//change default Request validation with your own validation
+    public function store(Request $request)
     {
+        // method we can use on $request
+        // guest Extension()
+        // getMimeType()
+        // store()
+        // asStore()
+        // storePublicly()
+        // move()
+        // getClientOriginalName()
+        // getClientMimeType()
+        // getClientExtension()
+        // getSize()
+        // getError()
+        // ip()
+        // isValid()
         
-        // Validate the data direct in controller before store it
-        // if the data not valid, this method will throw a ValidationException 
-        // $request->validate([
-        //     'name' =>  New Uppercase, // or => 'required|unique:cars'  for data of name should unique in table cars
-        //     'founded' => 'required|integer|min:0|max:2021',
-        //     'description' => 'required',
-        // ]);
+        $request->validate([
+            'image' => 'required|mimes:png,jpg,jpeg|max:5012',
+            'name' => 'required|unique:cars',
+            'founded' => 'required|min:0|max:2021',
+            'description' => 'required'
+        ]);
         
-        $request->validated();
+        $newImageName = time(). '-' . $request->name . '.' . $request->image->extension();
 
+        $request->image->move('images', $newImageName);
             
         $car = Car::create([
             'name' => $request->input('name'),
             'founded' => $request->input('founded'),
-            'description' => $request->input('description')
+            'description' => $request->input('description'),
+            'image_path' => $newImageName
         ]);
 
         return redirect('/cars');
@@ -173,7 +188,7 @@ class CarsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateValidationRequest $request, $id)
+    public function update(CreateValidationRequest $request, $id)//change default Request validation with your own validation
     {   
         $request->validated();
 
